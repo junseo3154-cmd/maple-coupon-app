@@ -24,7 +24,7 @@ jobs:
         distribution: 'zulu'
         java-version: '17'
 
-    - name: Force Create buildozer.spec (강제 생성 꼼수)
+    - name: Force Create buildozer.spec (최적화 버전)
       run: |
         cat << 'EOF' > buildozer.spec
         [app]
@@ -40,7 +40,7 @@ jobs:
         android.permissions = INTERNET
         android.api = 33
         android.minapi = 24
-        android.archs = arm64-v8a, armeabi-v7a
+        android.archs = arm64-v8a
         android.accept_sdk_license = True
         EOF
 
@@ -51,7 +51,7 @@ jobs:
         pip install --upgrade pip
         pip install "cython<3.0.0" buildozer
 
-    - name: Build APK with Buildozer (자동 동의 포함)
+    - name: Build APK with Buildozer
       run: |
         yes | buildozer -v android debug
 
